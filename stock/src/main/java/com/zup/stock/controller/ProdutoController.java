@@ -1,21 +1,22 @@
 package com.zup.stock.controller;
 
-import com.zup.stock.exception.ParametroInvalidoException;
-import com.zup.stock.model.ProdutoModel;
-import com.zup.stock.model.dto.ProdutoDTO;
+
+import com.zup.stock.model.dto.AtributosParciaisUpdate;
+import com.zup.stock.model.dto.ProdutoAllDTO;
+import com.zup.stock.model.dto.ProdutoPutDTO;
 import com.zup.stock.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/ZupStock/produtos")
+@Validated
 public class ProdutoController {
 
     @Autowired
@@ -31,23 +32,19 @@ public class ProdutoController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<ProdutoDTO>> listarProdutoPorId(@PathVariable Long id){
-        try {
-            return ResponseEntity.ok(produtoService.listarPorId(id));
-        }catch (NumberFormatException e){
-            throw new ParametroInvalidoException("Parâmetro inválido.");
-        }
+    public ResponseEntity<Optional<ProdutoAllDTO>> listarProdutoPorId(@PathVariable Long id){
+        return ResponseEntity.ok(produtoService.listarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody ProdutoDTO produtoDTO){
-        ProdutoDTO produtoNovo = produtoService.criar(produtoDTO);
+    public ResponseEntity<ProdutoAllDTO> cadastrarProduto(@Valid @RequestBody ProdutoAllDTO produtoDTO){
+        ProdutoAllDTO produtoNovo = produtoService.criar(produtoDTO);
         return new ResponseEntity<>(produtoNovo, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<ProdutoDTO> alterarProduto(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO){
-        ProdutoDTO produtoNovo = produtoService.alterar(id, produtoDTO);
+    public ResponseEntity<ProdutoPutDTO> alterarProduto(@PathVariable Long id, @Valid @RequestBody ProdutoPutDTO produtoDTO){
+        ProdutoPutDTO produtoNovo = produtoService.alterar(id, produtoDTO);
         return ResponseEntity.ok(produtoNovo);
     }
 
