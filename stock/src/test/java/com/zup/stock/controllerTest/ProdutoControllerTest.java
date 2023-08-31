@@ -13,7 +13,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -110,7 +109,7 @@ public class ProdutoControllerTest {
     public void testarEditarProduto() throws  Exception{
         ProdutoPutDTO produto = new ProdutoPutDTO("Arroz Integral","Arroz integral soltinho", BigDecimal.valueOf(19.90), 23);
 
-        Mockito.when(produtoService.alterar(1L, produto)).thenReturn(produto);
+        Mockito.when(produtoService.alterar(Mockito.any(), Mockito.any(produto.getClass()))).thenReturn(produto);
 
         mockMvc.perform(put("/api/ZupStock/produtos/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)

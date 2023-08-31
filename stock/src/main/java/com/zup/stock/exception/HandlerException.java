@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -42,5 +43,10 @@ public class HandlerException {
     @ExceptionHandler(TransactionSystemException.class)
     public ResponseEntity<String> handleTransactionSystemException(TransactionSystemException e){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Parâmetros inválidos/vazios.");
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<String> handleMissingServletRequestParameterException(MissingServletRequestParameterException e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Tipo de parâmetro inválido.");
     }
 }
