@@ -1,7 +1,5 @@
 package com.zup.stock.controller;
 
-
-
 import com.zup.stock.model.dto.ProdutoAllDTO;
 import com.zup.stock.model.dto.ProdutoPutDTO;
 import com.zup.stock.service.ProdutoService;
