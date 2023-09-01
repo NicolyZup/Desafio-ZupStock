@@ -62,7 +62,7 @@ Para conferir as requisições e suas respostas, só acessar [aqui](https://docu
 ## :pushpin: Swagger 
 Clique [aqui](http://localhost:8080/swagger-ui/index.html#/) para acessar o link do Swagger (necessário estar com o projeto rodando).
 
-<img src="./stock/src/main/resources/img/swagger.png" width="600">
+<img src="./stock/src/main/img/swagger.png" width="600">
 
 ## :pushpin: Arquitetura em camadas 
 Pasta controller: Responsável pela requisições HTTP, interage com a camada de serviço (service) encaminhando as solicitações.
@@ -81,7 +81,7 @@ Pasta models/dtos: Responsável pelos DTOS. objetos de transferência entre as c
 
 Os testes foram aplicados na camada Service e Controller, com 100% de cobertura. Foram utilizados para os testes: Mockito, JUnit e MockMvc.
 
-<img src="./stock/src/main/resources/img/testes.png" width="600">
+<img src="./stock/src/main/img/testes.png" width="600">
 
 ## :pushpin: Ferramentas e Tecnologias usadas
 - Java 11
